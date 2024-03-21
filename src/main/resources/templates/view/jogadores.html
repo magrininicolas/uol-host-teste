@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="https://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Jogadores</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" />
+    <style>
+        .table {
+            margin: 0 auto;
+            width: 80%;
+        }
+
+        .btn-excluir,
+        .btn-editar {
+            font-size: 0.9rem;
+            color: white;
+            border: 0;
+            border-radius: 15%;
+            padding: 2px 15px;
+        }
+
+        .btn-editar {
+            background-color: cornflowerblue;
+        }
+
+        .btn-excluir {
+            background-color: red;
+        }
+
+        .btn-excluir:hover,
+        .btn-editar:hover {
+            background-color: gray;
+        }
+
+        .alert {
+            width: 80%;
+            margin: 1rem auto 1rem;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="p-3">
+        <div class="h1 text-center">Jogadores Cadastrados</div>
+        <table class="table table-hover">
+            <thead>
+                <th scope="col">Nome</th>
+                <th scope="col">Email</th>
+                <th scope="col">Telefone</th>
+                <th scope="col">Codinome</th>
+                <th scope="col">Grupo</th>
+                <th scope="col"></th>
+                <th scope="col"></th>
+            </thead>
+            <tbody>
+                <tr th:each="jogador : ${jogadores}">
+                    <td class="col-2" th:text="${jogador.nome}"></td>
+                    <td class="col-2" th:text="${jogador.email}"></td>
+                    <td class="col-2" th:text="${jogador.telefone}"></td>
+                    <td class="col-2" th:text="${jogador.codinome}"></td>
+                    <td class="col-2" th:text="${jogador.grupo}"></td>
+                    <td class="col-1 text-center">
+                        <a th:href="@{/jogadores/{jogadorId}/edit(jogadorId = ${jogador.id})}"
+                            class="btn btn-editar">Editar</a>
+                    </td>
+                    <td class="col-1 text-center"><a href="" class="btn btn-excluir"
+                            onclick="return confirm('Tem certeza de que deseja excluir este jogador?');">Excluir</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="text-center">
+        <a th:href="@{/jogadores/new}" class="btn btn-primary p-3">Novo Jogador</a>
+    </div>
+    <div class="alert alert-success text-center" role="alert" th:text="${success}" th:if="${success}"></div>
+    <div class="alert alert-danger text-center" role="alert" th:text="${failure}" th:if="${failure}"></div>
+</body>
+
+</html>
