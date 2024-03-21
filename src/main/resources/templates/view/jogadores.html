@@ -66,8 +66,9 @@
                         <a th:href="@{/jogadores/{jogadorId}/edit(jogadorId = ${jogador.id})}"
                             class="btn btn-editar">Editar</a>
                     </td>
-                    <td class="col-1 text-center"><a href="" class="btn btn-excluir"
-                            onclick="return confirm('Tem certeza de que deseja excluir este jogador?');">Excluir</a>
+                    <td class="col-1 text-center"><a
+                            th:href="@{/jogadores/{jogadorId}/delete(jogadorId = ${jogador.id})}"
+                            class="btn btn-excluir">Excluir</a>
                     </td>
                 </tr>
             </tbody>

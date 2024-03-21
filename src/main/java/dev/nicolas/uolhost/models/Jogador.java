@@ -9,7 +9,9 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.Pattern;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -39,7 +41,9 @@ public class Jogador implements Serializable {
     @Column(unique = true)
     private String email;
 
-    @NotEmpty(message = "O telefone do jogador não pode estar vazio. Atente-se ao padrão.")
+    @NotEmpty(message = "O telefone do jogador não pode estar vazio.")
+    @NotBlank(message = "O telefone do jogador não pode estar vazio.")
+    @Pattern(regexp = "(\\(\\d{2}\\)\\d{4,5}-\\d{4})", message = "O telefone do jogador deve estar no padrão (99)99999-9999")
     private String telefone;
 
     private String codinome;

@@ -81,7 +81,6 @@ public class JogadorController {
     @PostMapping("/{id}")
     public ModelAndView updateJogador(@PathVariable Long id, @Valid Jogador jogador, BindingResult result,
             RedirectAttributes attributes) {
-
         try {
             if (result.hasErrors()) {
                 return new ModelAndView("view/editar");
@@ -99,6 +98,13 @@ public class JogadorController {
             attributes.addFlashAttribute("failure", "Email já existe");
             return new ModelAndView("redirect:/jogadores/" + id + "/edit");
         }
+    }
+
+    @GetMapping("/{id}/delete")
+    public String deleteJogador(@PathVariable Long id, RedirectAttributes attributes) {
+        jogadorRepository.deleteById(id);
+        attributes.addFlashAttribute("success", "Jogador excluído com sucesso!");
+        return "redirect:/jogadores";
     }
 
     private boolean checkDuplicateEmail(@Valid Jogador jogador, BindingResult result) {
